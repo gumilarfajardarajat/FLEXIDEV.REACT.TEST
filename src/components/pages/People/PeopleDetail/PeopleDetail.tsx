@@ -2,9 +2,8 @@
 import { useNavigate, useParams } from "react-router-dom"
 import config from "../../../../config/app.json"
 import { useEffect, useState } from "react"
-import IPerson from "../../../../interfaces/IPerson"
 import axios from "axios"
-import { Button, Card, CardActions, CardContent, Container, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material"
+import { Card, CardContent, Container, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material"
 import { filterList } from "../../../../helpers/JsonHelper"
 import TableFragment from "../../../fragments/TableFragment"
 import ViewListIcon from '@mui/icons-material/ViewList';
@@ -18,12 +17,12 @@ const PeopleDetail = () => {
   const [starships,setStarships] = useState<any[]|null>(null)
   
   const apiUrl = config.baseApiUrl+'people/'+id
+  const baseUrl = config.baseUrl;
 
   const loadData = (setState:any,name:string) => {
     axios.get(config.baseApiUrl+name).then(response =>{
       let criterias : any[] = person[name];
       let jsonData : any[] = response.data.results;
-      let criteriaType : string = name == 'film'? 'title' : 'name'
       let filteredList : any = filterList(jsonData,criterias,'url')
       setState(filteredList)
     }).catch(error => {
@@ -49,7 +48,7 @@ const PeopleDetail = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/');
+    navigate('/'+baseUrl);
   }
 
 

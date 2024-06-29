@@ -5,12 +5,14 @@ import ButtonPaginationFragment from "../../fragments/ButtonPaginationFragment";
 import TableBodyPeopleFragment from "../../fragments/TableBodyPeopleFragment";
 import TableHeadFragment from "../../fragments/TableHeadFragment"
 import IPeople from "../../../interfaces/IPeople";
+import config from "../../../config/app.json"
 
 const People = () => {
+  const apiUrl = config.baseApiUrl+'people/'
   const [people, setPeople] = useState<IPeople[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [count, setCount] = useState<number>(0);
-  const [url, setUrl] = useState<string>("https://swapi.dev/api/people?page=1");
+  const [url, setUrl] = useState<string>(apiUrl+"?page=1");
   const limit: number = 10;
 
   useEffect(() => {

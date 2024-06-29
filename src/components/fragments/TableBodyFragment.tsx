@@ -1,5 +1,4 @@
 import { TableBody, TableCell, TableRow } from "@mui/material";
-import React from "react";
 
 interface TableBodyFragmentProps {
   data: any[] | null;

@@ -7,14 +7,16 @@ import {
 import "./index.css";
 import People from "./components/pages/People/People";
 import PeopleDetail from "./components/pages/People/PeopleDetail/PeopleDetail";
+import config from "./config/app.json"
 
+const apiUrl = config.baseUrl = 'FLEXIDEV.REACT.TEST'
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: apiUrl+"/",
     Component: People
   },
   {
-    path: "/:id",
+    path: apiUrl+"/:id",
     Component: PeopleDetail
   },
 ]);
