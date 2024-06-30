@@ -4,9 +4,8 @@ import config from "../../../../config/app.json"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Card, CardContent, Container, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material"
-import { filterList } from "../../../../helpers/JsonHelper"
-import TableFragment from "../../../fragments/TableFragment"
-import ViewListIcon from '@mui/icons-material/ViewList';
+import ViewListIcon from '@mui/icons-material/ViewList'
+import ListTableFragment from "../../../fragments/ListTableFragment"
 
 const PeopleDetail = () => {
   const { id } = useParams()
@@ -17,38 +16,51 @@ const PeopleDetail = () => {
   const [starships,setStarships] = useState<any[]|null>(null)
   
   const apiUrl = config.baseApiUrl+'people/'+id
-  const baseUrl = config.baseUrl;
+  const baseUrl = config.baseUrl
 
-  const loadData = (setState:any,name:string) => {
-    axios.get(config.baseApiUrl+name).then(response =>{
-      let criterias : any[] = person[name];
-      let jsonData : any[] = response.data.results;
-      let filteredList : any = filterList(jsonData,criterias,'url')
-      setState(filteredList)
-    }).catch(error => {
-      console.error(error)
-    })
+  const loadData = async (setState:any,name:string) => {
+
+    // console.log(person[name])
+    try {
+     
+      // Create an array of Axios promises
+      const axiosPromises = person[name].map((url:string) => axios.get(url))
+  
+      // Execute all requests concurrently using Promise.all
+      const responses = await Promise.all(axiosPromises)
+  
+      // Process responses
+      const data = responses.map(response => response.data)
+      
+      console.log('Data from all requests:', data)
+      
+      setState(data)
+    } catch (error) {
+      console.error('Error fetching data:', error)
+      throw error // Re-throw or handle the error as needed
+    }
+
   }
 
   useEffect(()=>{
     axios.get(apiUrl)
     .then(response =>{
       setPerson(response.data)
+      
     }).catch(error => {
       console.error(error)
     })
 
-    loadData(setFilms,'films')
-    loadData(setVehicles,'vehicles')
-    loadData(setSpecies,'species')
-    loadData(setStarships,'starships')
+  },[films])
 
-  },[person,films])
+  const navigate = useNavigate()
 
-  const navigate = useNavigate();
+  const handleClickLoad = (setState:any,name:string) => {
+    loadData(setState,name)
+  }
 
   const handleClick = () => {
-    navigate('/'+baseUrl);
+    navigate('/'+baseUrl)
   }
 
 
@@ -95,22 +107,10 @@ const PeopleDetail = () => {
               </TableBody>
             </Table>
           </TableContainer>
-          <div className="bg-slate-600 text-white py-5">
-            <Typography variant="h5" align="center">Films</Typography>
-          </div>
-          <TableFragment data={films} attributes={['title','opening_crawl','director']} columns={['Title','Description','director']}/>
-          <div className="bg-slate-600 text-white py-5">
-            <Typography variant="h5" align="center">Species</Typography>
-          </div>
-          <TableFragment data={species} attributes={[["name","classification","designation","language"]]} columns={["Name","Classification","Designation","Language"]}/>
-          <div className="bg-slate-600 text-white py-5">
-            <Typography variant="h5" align="center">Starships</Typography>
-          </div>
-          <TableFragment data={starships} attributes={["name","model","manufacturer","starship_class"]} columns={["Name","Model","Manufacturer","Starship Class"]}/>
-          <div className="bg-slate-600 text-white py-5">
-            <Typography variant="h5" align="center">Vehicles</Typography>
-          </div>
-          <TableFragment data={vehicles} attributes={["name","model","manufacturer","vehicle_class"]} columns={["Name","Model","Manufacturer","Vehicle class"]}/>
+          <ListTableFragment state={films} setState={setFilms} attributes={['title','opening_crawl','director']} columns={['Title','Description','director']} handleClickLoad={handleClickLoad} title="Films" name="films"/>
+          <ListTableFragment state={species} setState={setSpecies} attributes={["name","classification","designation","language"]} columns={["Name","Classification","Designation","Language"]} handleClickLoad={handleClickLoad} title="Species" name="species"/>
+          <ListTableFragment state={starships} setState={setStarships} attributes={["name","model","manufacturer","starship_class"]} columns={["Name","Model","Manufacturer","Starship Class"]} handleClickLoad={handleClickLoad} title="Starships" name="starships"/>
+          <ListTableFragment state={vehicles} setState={setVehicles} attributes={["name","model","manufacturer","vehicle_class"]} columns={["Name","Model","Manufacturer","Vehicle class"]} handleClickLoad={handleClickLoad} title="Vehicles" name="vehicles"/>
           </CardContent>
         </Card>
       </Container>

@@ -1,12 +1,12 @@
-import { TableBody, TableCell, TableRow } from "@mui/material";
+import { TableBody, TableCell, TableRow } from "@mui/material"
 
 interface TableBodyFragmentProps {
-  data: any[] | null;
-  attributes: string[] | null; // Assuming attributes are keys of 'data' objects
+  data: any[] | null
+  attributes: string[] | null // Assuming attributes are keys of 'data' objects
 }
 
 const TableBodyFragment = (props: TableBodyFragmentProps) => {
-  const { data, attributes } = props;
+  const { data, attributes } = props
 
   // Guard clause: handle cases where 'data' or 'attributes' are null or empty
   if (!data || data.length === 0 || !attributes || attributes.length === 0) {
@@ -18,7 +18,7 @@ const TableBodyFragment = (props: TableBodyFragmentProps) => {
           </TableCell>
         </TableRow>
       </TableBody>
-    );
+    )
   }
 
   return (
@@ -31,7 +31,7 @@ const TableBodyFragment = (props: TableBodyFragmentProps) => {
         </TableRow>
       ))}
     </TableBody>
-  );
-};
+  )
+}
 
-export default TableBodyFragment;
+export default TableBodyFragment
