@@ -1,30 +1,20 @@
-# React + TypeScript + Vite
+<div align="center">
+  <img src="https://pngimg.com/uploads/star_wars_logo/star_wars_logo_PNG34.png" width="200px">
+  <p>
+    This Application created from open API <a href="https://swapi.dev/api/">swapi.dev</a>, it contain data all the stuff that related to StarWars movie, by using this application you can see the list of the character and all the film, starship, vehicle species that related to the Character
+  <br>
+  <a href="https://gumilarfajardarajat.github.io/FLEXIDEV.REACT.TEST"><strong>Explore Demo App »</strong></a>
+  <br>
+  </p>
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h2>Built In</h2>
+<a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"></a>
+<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"></a>
 
-Currently, two official plugins are available:
+<h2>Thanks</h2>
+<p>Thanks to <a href="https://flexidev.co/">FlexiDev</a> for giving me a challange</p>
+<div style="background-color:black">
+  <img src="https://referit.co/wp-content/uploads/2023/10/FlexiDev.Logo_.Dark_.Tagline-300x88.png" width="200px">
+</div>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
