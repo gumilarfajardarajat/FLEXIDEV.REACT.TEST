@@ -4,8 +4,8 @@ import config from "../../../../config/app.json"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Card, CardContent, Container, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material"
-import ViewListIcon from '@mui/icons-material/ViewList'
 import ListTableFragment from "../../../fragments/ListTableFragment"
+import { Home } from "@mui/icons-material"
 
 const PeopleDetail = () => {
   const { id } = useParams()
@@ -114,7 +114,7 @@ const PeopleDetail = () => {
           </CardContent>
         </Card>
       </Container>
-      <div className="fixed bg-black text-6xl bottom-0 right-0 text-white p-5 rounded-full inline-flex cursor-pointer" onClick={()=>handleClick()}><ViewListIcon/></div>
+      <div className="fixed bg-blue-600 text-6xl bottom-0 right-32 text-white p-5 rounded-full inline-flex cursor-pointer" onClick={()=>handleClick()}><Home/></div>
     </>
   )
 }
